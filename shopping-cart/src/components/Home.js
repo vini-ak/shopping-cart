@@ -1,16 +1,41 @@
 import React from 'react';
+import Produto from './Produto';
 
-const Home = () => {
-    return (
-        <div className="container">
-            <div className="product">
-                <img src="" alt="" />
-                <h3>Grey tshirt</h3>
-                <h3><small>R$</small>15,00</h3>
-                <a href="#">Add to Cart</a>
+class Home extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            produtos : {}
+        }
+        this.extrairJSON =  this.extrairJSON.bind(this);
+    }
+
+    extrairJSON() {
+        
+        fetch('https://foodsgo.glitch.me/produtos', {method: 'get'})
+        .then(res => {
+            return res.json();
+        })
+        .then(json => {
+            this.setState(() => ({
+                produtos: json
+            }));
+        })
+        .then(() => {
+            console.log(this.state.produtos);
+        })
+
+    }
+
+
+    render() {
+        return (
+            <div>
+                {this.extrairJSON()}
             </div>
-        </div>
-    );
+        );
+    }
 }
 
-export default Home;
+export default Home; 
