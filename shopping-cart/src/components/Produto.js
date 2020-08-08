@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@material-ui/core';
 
 class Produto extends React.Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class Produto extends React.Component {
                 <img src={this.props.imagem}/>
                 <h3>{this.props.titulo}</h3>
                 <p>{this.props.descricao}</p>
-                <a className="add-to-cart">Adicionar ao carrinho</a>
+                <Button color="primary">Adicionar ao carrinho</Button>
                 <h4><small>R$</small>{this.props.preco}</h4>
             </div>
         );

@@ -1,0 +1,18 @@
+.container {
+	margin-top: 50px;
+	padding: 0 10vw;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: start;
+	align-items: center;
+}
+
+.product {
+	min-width: 150px;
+	margin: 0 50px;
+	margin-top: 50px;
+}
+
+small {
+	font-size: 0.75rem;
+}
