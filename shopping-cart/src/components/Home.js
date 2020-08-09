@@ -37,7 +37,9 @@ class Home extends React.Component {
     render() {
         return (
             <div className="container"> 
-                {this.produtos()}
+                {this.props.produtos.map((produto) => (
+                    <Produto titulo ={produto.titulo} preco={produto.preco} imagem={produto.imagem} />
+                ))}
             </div>
         );
     }

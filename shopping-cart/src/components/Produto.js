@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 
 class Produto extends React.Component {
     constructor(props) {
@@ -8,13 +9,18 @@ class Produto extends React.Component {
 
     render() {
         return(
-            <div>
+            <Card className="product">
                 <img src={this.props.imagem}/>
                 <h3>{this.props.titulo}</h3>
-                <p>{this.props.descricao}</p>
-                <Button color="primary">Adicionar ao carrinho</Button>
-                <h4><small>R$</small>{this.props.preco}</h4>
-            </div>
+                <div>
+                    <h2><small>R$</small>{this.props.preco}</h2>
+                    <Button variant="contained" color="primary" className="add-to-cart">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        Adicionar ao carrinho
+                    </Button>
+                </div>
+                
+            </Card>
         );
     }
 }

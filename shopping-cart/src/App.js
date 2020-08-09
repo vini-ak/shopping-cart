@@ -31,9 +31,7 @@ class App extends React.Component {
     		<div className="App">
     			<Navbar />
                 <h1>Produtos</h1>
-                {this.state.loading ? <p>Loading...</p> : this.state.produtos.map((produto) => (
-                    <Produto titulo ={produto.titulo} descricao={produto.descricao} preco={produto.preco} imagem={produto.imagem} />
-                ))}
+                {this.state.loading ? <p className="loading">Loading...</p> : <Home produtos={this.state.produtos} />}
     			
     		</div>
     	);
