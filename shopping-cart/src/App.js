@@ -1,36 +1,41 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import Produto from './components/Produto';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			produtos : {}
-		};
 
-		this.extrairJSON = this.extrairJSON.bind(this);
 	}
 
-	extrairJSON() {
-        fetch('http://localhost:3001/produtos')
-        .then(res => res.json(), {method: 'get'})
+    state = {
+        produtos : {},
+        loading: true
+    };
+
+	componentDidMount() {
+        fetch('https://foodsgo.glitch.me/produtos',  {method: 'get'})
+        .then(res => res.json())
         .then((data) => {
-            this.setState({ produtos: data});
+            this.setState({ produtos: data, loading: false})
+            console.log(this.state.produtos)
         })
-        .catch(console.log)
+        .catch(console.log('esperando avioes'));
     }
 
     render() {
-    	this.extrairJSON();
     	return(
     		<div className="App">
     			<Navbar />
-    			<Home produtos={this.state.produtos} />
+                <h1>Produtos</h1>
+                {this.state.loading ? <p>Loading...</p> : this.state.produtos.map((produto) => (
+                    <Produto titulo ={produto.titulo} descricao={produto.descricao} preco={produto.preco} imagem={produto.imagem} />
+                ))}
+    			
     		</div>
-    		
     	);
     }
 }
