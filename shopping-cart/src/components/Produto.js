@@ -14,7 +14,7 @@ class Produto extends React.Component {
                 <h3>{this.props.titulo}</h3>
                 <div>
                     <h2><small>R$</small>{this.props.preco}</h2>
-                    <Button variant="contained" color="primary" className="add-to-cart">
+                    <Button onClick={this.props.onClick} variant="contained" color="primary" className="add-to-cart">
                         <ion-icon name="add-circle-outline"></ion-icon>
                         Adicionar ao carrinho
                     </Button>

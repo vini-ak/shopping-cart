@@ -2,6 +2,8 @@ import React from 'react';
 import './Home.css';
 import Produto from './Produto';
 import { Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { addCart } from '../actions/addAction';
 
 
 class Home extends React.Component {
@@ -14,6 +16,7 @@ class Home extends React.Component {
 
         this.addToCart = this.addToCart.bind(this);
         this.produtos = this.produtos.bind(this);
+        console.log(props);
     }
 
 
@@ -38,11 +41,11 @@ class Home extends React.Component {
         return (
             <div className="container"> 
                 {this.props.produtos.map((produto) => (
-                    <Produto titulo ={produto.titulo} preco={produto.preco} imagem={produto.imagem} />
+                    <Produto titulo ={produto.titulo} preco={produto.preco} imagem={produto.imagem} onClick={this.props.addCart} />
                 ))}
             </div>
         );
     }
 }
 
-export default Home; 
+export default connect(null, { addCart })(Home); 

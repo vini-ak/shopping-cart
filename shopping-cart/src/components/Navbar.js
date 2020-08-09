@@ -1,7 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { getNumbers } from '../actions/getAction';
 
-function Navbar() {
+
+function Navbar(props) {
+
+    useEffect(() => {
+        getNumbers();
+    }, []);
     return (
             <header>
                 <div className="overlay"></div>
@@ -13,6 +20,7 @@ function Navbar() {
                     <Button color="primary">
                         <ion-icon name="basket-sharp"></ion-icon>
                         Cart
+                        (<span>{props.cartProps.items}</span>)
                     </Button>
                 </ul>
                 </nav>
@@ -20,4 +28,8 @@ function Navbar() {
     );
 }
 
-export default Navbar;
+const mapStateToProps = state => ({
+    cartProps: state.cartState
+})
+
+export default connect(mapStateToProps, { getNumbers })(Navbar);
