@@ -10,20 +10,12 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            items : 0,
-            preco : 0,
+            produtos: {},
+            loading: true
         };
 
-        this.addToCart = this.addToCart.bind(this);
         this.produtos = this.produtos.bind(this);
         console.log(props);
-    }
-
-
-    addToCart() {
-        this.setState((state) => ({
-            items : ++state.items
-        }))
     }
 
     produtos() {
@@ -37,10 +29,20 @@ class Home extends React.Component {
         }
     }
 
+    componentDidMount() {
+        fetch('https://foodsgo.glitch.me/produtos',  {method: 'get'})
+        .then(res => res.json())
+        .then((data) => {
+            this.setState({ produtos: data, loading: false})
+            console.log(this.state.produtos)
+        })
+        .catch(console.log('esperando avioes'));
+    }
+
     render() {
         return (
             <div className="container"> 
-                {this.props.produtos.map((produto) => (
+                {this.state.loading ? <p className="loading">Loading...</p> : this.state.produtos.map((produto) => (
                     <Produto titulo ={produto.titulo} preco={produto.preco} imagem={produto.imagem} onClick={this.props.addCart} />
                 ))}
             </div>

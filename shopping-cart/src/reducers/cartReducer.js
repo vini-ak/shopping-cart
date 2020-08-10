@@ -1,7 +1,11 @@
 import { ADD_PRODUCT_CART, GET_NUMBERS_CART } from '../actions/types';
 
 const initialState = {
-	items: 0
+	items: 0,
+	cartCost: 0,
+	products: {
+		
+	}
 }
 
 /*
