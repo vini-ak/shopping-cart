@@ -1,0 +1,49 @@
+.total {
+	text-align: right;
+	position: relative;
+	top: 8vh; right: 8vw;
+}
+
+.container-cart {
+	margin: 0 5vw;
+	margin-top: 20px;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	padding: 1vh 5vw;
+	position: relative;
+	top: 7vw;
+	height: 22vh; min-height: 140px;
+}
+
+.container-cart > * {
+	position: relative;
+}
+
+.arrow {
+  color: orange;
+}
+
+.container-cart > img{
+	width: 10vw;
+	left: 0;
+}
+
+.item-info {
+	left: 3vw;
+	width: 50vw;
+}
+
+.item-options {
+	left: 10vw;
+	right: 0;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}
+
+.quantity-controller {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}

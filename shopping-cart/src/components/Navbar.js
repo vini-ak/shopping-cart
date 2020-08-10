@@ -17,7 +17,7 @@ function Navbar(props) {
                 <h2>Shopping Cart</h2>
                 <ul>
                     <Link to="/"><Button color="primary">Home</Button></Link>
-                    <Link to='/about'><Button color="primary">Home</Button></Link>
+                    <Link to='/about'><Button color="primary">About</Button></Link>
                     <Link to='/cart'>
                         <Button color="primary">
                             <ion-icon name="basket-sharp"></ion-icon>

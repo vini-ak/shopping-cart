@@ -34,16 +34,22 @@ class Home extends React.Component {
         .then(res => res.json())
         .then((data) => {
             this.setState({ produtos: data, loading: false})
-            console.log(this.state.produtos)
+            window.produtos = {}
+            this.state.produtos.forEach((produto) => {
+                produto['inCart'] = false;
+                produto['quantidade'] = 0;
+                window.produtos[produto.id] = produto;
+            });
         })
-        .catch(console.log('esperando avioes'));
+        .catch(console.log('Esperando a response...'));
+
     }
 
     render() {
         return (
             <div className="container"> 
                 {this.state.loading ? <p className="loading">Loading...</p> : this.state.produtos.map((produto) => (
-                    <Produto titulo ={produto.titulo} preco={produto.preco} imagem={produto.imagem} onClick={this.props.addCart} />
+                    <Produto id={produto.id} titulo ={produto.titulo} preco={produto.preco} imagem={produto.imagem} onClick={this.props.addCart} />
                 ))}
             </div>
         );
