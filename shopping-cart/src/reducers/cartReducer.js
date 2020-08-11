@@ -64,9 +64,26 @@ export default (state = initialState, action) => {
 			}
 
 		case DECREASE_QUANTITY:
-			return {
-				...state
+			productSelected = {...state.produtos[action.payload]};
+			
+			if(productSelected.quantidade == 0) {
+				return {
+					...state
+				}
+			} else if (productSelected.quantidade > 0) {
+				--productSelected.quantidade;
+
+				return {
+					...state,
+					cartCost: state.cartCost - state.produtos[action.payload].preco,
+					produtos: {
+						...state.produtos,
+						[action.payload]: productSelected
+					}
+				}
 			}
+			
+
 		default:
 			return state;
 	}
