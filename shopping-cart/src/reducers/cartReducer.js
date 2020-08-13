@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_CART, GET_NUMBERS_CART, INCREASE_QUANTITY, DECREASE_QUANTITY } from '../actions/types';
+import { ADD_PRODUCT_CART, GET_NUMBERS_CART, INCREASE_QUANTITY, DECREASE_QUANTITY, REMOVE_PRODUCT } from '../actions/types';
 
 const initialState = {
 	items: 0,
@@ -21,17 +21,17 @@ fetch('https://foodsgo.glitch.me/produtos')
 
 /*
 const initialState =  {
-	basketNumbers: 0
+	items: 0
 }
 
 */
 
 export default (state = initialState, action) => {
 	let productSelected = '';
+	productSelected = {...state.produtos[action.payload]};
 
 	switch(action.type) {
 		case ADD_PRODUCT_CART:
-			productSelected = { ...state.produtos[action.payload]}
 			console.log(productSelected.titulo);
 			productSelected.quantidade += 1;
 			productSelected.inCart = true;
@@ -51,11 +51,11 @@ export default (state = initialState, action) => {
 			}
 
 		case INCREASE_QUANTITY:
-			productSelected = {...state.produtos[action.payload]};
 			++productSelected.quantidade;
 
 			return {
 				...state,
+				items: ++state.items,
 				cartCost: state.cartCost + state.produtos[action.payload].preco,
 				produtos: {
 					...state.produtos,
@@ -64,7 +64,6 @@ export default (state = initialState, action) => {
 			}
 
 		case DECREASE_QUANTITY:
-			productSelected = {...state.produtos[action.payload]};
 			
 			if(productSelected.quantidade == 0) {
 				return {
@@ -75,6 +74,7 @@ export default (state = initialState, action) => {
 
 				return {
 					...state,
+					items: --state.items,
 					cartCost: state.cartCost - state.produtos[action.payload].preco,
 					produtos: {
 						...state.produtos,
@@ -83,6 +83,21 @@ export default (state = initialState, action) => {
 				}
 			}
 			
+		case REMOVE_PRODUCT:
+			let valorRemovido = productSelected.preco * productSelected.quantidade;
+			let quantidadeRemovida = productSelected.quantidade
+			productSelected.quantidade = 0;
+			productSelected.inCart = false;
+
+			return {
+				...state,
+				items: state.items - quantidadeRemovida,
+				cartCost: state.cartCost - valorRemovido,
+				produtos: {
+					...state.produtos,
+					[action.payload]: productSelected
+				}
+			}
 
 		default:
 			return state;

@@ -1,4 +1,4 @@
-import { INCREASE_QUANTITY, DECREASE_QUANTITY } from './types';
+import { INCREASE_QUANTITY, DECREASE_QUANTITY, REMOVE_PRODUCT } from './types';
 
 export const productQuantity = (action, produtoId) => {
 	return(dispatch) => {
@@ -7,6 +7,15 @@ export const productQuantity = (action, produtoId) => {
 
 		dispatch({
 			type: action === 'increase' ? INCREASE_QUANTITY : DECREASE_QUANTITY,
+			payload: produtoId
+		})
+	}
+}
+
+export const removeProduct = (produtoId) => {
+	return(dispatch) => {
+		dispatch({
+			type: REMOVE_PRODUCT,
 			payload: produtoId
 		})
 	}

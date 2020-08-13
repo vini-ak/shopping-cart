@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { productQuantity } from '../actions/productQuantity';
+import { productQuantity, removeProduct } from '../actions/productQuantity';
 import { Card, Button } from '@material-ui/core';
 import './Cart.css';
 
 
-function Cart( {cartProps, productQuantity } ) {
+function Cart( {cartProps, productQuantity, removeProduct } ) {
 	let produtosInCart = [];
 
 	Object.keys(cartProps.produtos).forEach(item => {
@@ -29,7 +29,7 @@ function Cart( {cartProps, productQuantity } ) {
 							<p>x{produto.quantidade}</p>
 							<ion-icon name="caret-forward" onClick={() => productQuantity('increase', produto.id)} className="arrow"></ion-icon>
 						</div>
-						<Button color="secondary">Remover</Button>
+						<Button color="secondary" onClick={ () => removeProduct(produto.id)}>Remover</Button>
 					</div>
 				</Card>
 			</Fragment>
@@ -50,4 +50,4 @@ const mapStateToProps = state => ({
     cartProps: state.cartState
 });
 
-export default connect(mapStateToProps, { productQuantity })(Cart);
+export default connect(mapStateToProps, { productQuantity, removeProduct })(Cart);
